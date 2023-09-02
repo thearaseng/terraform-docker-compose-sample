@@ -50,5 +50,4 @@ jobs:
             -H "Authorization: Bearer $TF_API_TOKEN" \
             "https://app.terraform.io/api/v2/organizations/$TF_CLOUD_ORGANIZATION/workspaces/$TF_WORKSPACE/current-run/output")
           
-          OUTPUT_VALUE=$(echo $OUTPUTS_JSON | jq -r '.data.attributes.values.web-address')
-          echo "Fetched Terraform Output: $OUTPUT_VALUE"
+          echo "Fetched Terraform Output: $OUTPUTS_JSON"
