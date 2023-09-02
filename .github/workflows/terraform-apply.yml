@@ -44,15 +44,11 @@ jobs:
           run: ${{ steps.apply-run.outputs.run_id }}
           comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
 
-      - uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.4
-        id: plan-output
-        with:
-          plan: ${{ steps.apply-run.outputs.plan_id }}
-
-      - name: Reference Plan Output
+      - name: Fetch Outputs
         run: |
-          echo "Plan status: ${{ steps.plan-output.outputs.web-address }}"
-          echo "Plan status: ${{ steps.plan-output.outputs.plan_status }}"
-          echo "Resources to Add: ${{ steps.plan-output.outputs.add }}"
-          echo "Resources to Change: ${{ steps.plan-output.outputs.change }}"
-          echo "Resources to Destroy: ${{ steps.plan-output.outputs.destroy }}"
+          OUTPUTS_JSON=$(curl -s -X GET \
+            -H "Authorization: Bearer $TF_API_TOKEN" \
+            "https://app.terraform.io/api/v2/organizations/$TF_CLOUD_ORGANIZATION/workspaces/$TF_WORKSPACE/current-run/output")
+          
+          OUTPUT_VALUE=$(echo $OUTPUTS_JSON | jq -r '.data.attributes.values.web-address')
+          echo "Fetched Terraform Output: $OUTPUT_VALUE"
