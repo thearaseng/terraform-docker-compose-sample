@@ -60,3 +60,12 @@ jobs:
 
       - name: Test
         run: echo ${{ env.WEB_ADDRESS }}
+
+      - name: Deploy to Docker compose
+        uses: wshihadeh/docker-deployment-action@v1
+        with:
+          remote_docker_host: ec2-user@${{ env.WEB_ADDRESS }}
+          ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          deployment_mode: docker-compose
+          stack_file_name: docker-compose.yaml
+          args: my-app
