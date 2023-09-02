@@ -49,7 +49,7 @@ jobs:
         with:
           workspace: ${{ env.TF_WORKSPACE }}
           terraform_wrapper: false
-        run: echo TEST=$(terraform output web-address) >> $GITHUB_ENV
+          run: echo TEST=$(terraform output web-address) >> $GITHUB_ENV
 
       - name: Set Docker Host
         run: echo "remote_docker_host=${{ env.TEST }}"
