@@ -44,13 +44,12 @@ jobs:
           run: ${{ steps.apply-run.outputs.run_id }}
           comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
 
-      - name: Get Terraform Cloud Output
-        uses: hashicorp/tfc-workflows-github/actions/get-run-output@v1.0.0
-        id: get-tfc-output
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
         with:
           workspace: ${{ env.TF_WORKSPACE }}
-          run: ${{ steps.apply.outputs.run_id }}
-          output_name: web-address
+          terraform_wrapper: false
+        run: echo TEST=$(terraform output web-address) >> $GITHUB_ENV
 
       - name: Set Docker Host
-        run: echo "remote_docker_host=${{ steps.get-tfc-output.outputs.value }}"
+        run: echo "remote_docker_host=${{ env.TEST }}"
