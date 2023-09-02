@@ -50,7 +50,7 @@ jobs:
           terraform_wrapper: false
 
       - name: Export Terraform output
-        run: echo TEST=$(terraform output web-address) >> $GITHUB_ENV
+        run: echo $(terraform output)
 
       - name: Set Docker Host
         run: echo "remote_docker_host=${{ env.TEST }}"
