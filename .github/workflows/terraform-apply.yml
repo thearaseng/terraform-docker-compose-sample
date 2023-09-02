@@ -63,5 +63,6 @@ jobs:
         with:
           remote_docker_host: ec2-user@${{ env.WEB_ADDRESS }}
           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
+          ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
           stack_file_name: docker-compose.yml
           args: -p myapp up -d
