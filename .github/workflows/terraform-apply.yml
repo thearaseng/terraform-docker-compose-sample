@@ -52,8 +52,6 @@ jobs:
           workspace: ${{ env.TF_WORKSPACE }}
 
       - name: Export Terraform output
-        with:
-          workspace: ${{ env.TF_WORKSPACE }}
         run: echo TEST=$(terraform output -raw web-address)
 
       - name: Set Docker Host
