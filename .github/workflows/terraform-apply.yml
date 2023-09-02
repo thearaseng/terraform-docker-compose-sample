@@ -44,10 +44,6 @@ jobs:
           run: ${{ steps.apply-run.outputs.run_id }}
           comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
 
-      - name: Fetch Outputs
+      - name: Get Terraform outputs
         run: |
-          OUTPUTS_JSON=$(curl -s -X GET \
-            -H "Authorization: Bearer $TF_API_TOKEN" \
-            "https://app.terraform.io/api/v2/organizations/$TF_CLOUD_ORGANIZATION/workspaces/$TF_WORKSPACE/current-run/output")
-          
-          echo "Fetched Terraform Output: $OUTPUTS_JSON"
+          echo "The Terraform outputs are: $(terraform output -json)"
