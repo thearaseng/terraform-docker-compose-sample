@@ -47,7 +47,7 @@ jobs:
       - uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.4
         id: plan-output
         with:
-          plan: ${{ steps.apply.outputs.plan_id }}
+          plan: ${{ steps.apply-run.outputs.plan_id }}
 
       - name: Reference Plan Output
         run: |
