@@ -59,4 +59,4 @@ jobs:
           echo WEB_ADDRESS=$WEB_ADDRESS >> $GITHUB_ENV
 
       - name: Test
-        run: echo ${{ WEB_ADDRESS }}
+        run: echo ${{ env.WEB_ADDRESS }}
