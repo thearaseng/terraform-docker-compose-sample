@@ -53,3 +53,10 @@ jobs:
             "https://app.terraform.io/api/v2/workspaces/$TF_WORKSPACE_ID/current-state-version-outputs")
           
           echo "Fetched Terraform Output: $OUTPUTS_JSON"
+          
+          WEB_ADDRESS=$(echo $OUTPUTS_JSON | jq -r '.data[] | select(.attributes.name == "web-address") | .attributes.value')
+          echo "web address: $WEB_ADDRESS"
+          echo WEB_ADDRESS=$WEB_ADDRESS >> $GITHUB_ENV
+
+      - name: Test
+        run: echo ${{ WEB_ADDRESS }}
