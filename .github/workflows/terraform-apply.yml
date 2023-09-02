@@ -46,11 +46,12 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        id: tf
         with:
           terraform_wrapper: false
 
       - name: Export Terraform output
-        run: echo TEST=$(terraform output web-address) >> $GITHUB_ENV
+        run: echo "TEST=$(terraform output -raw web-address)" >> $GITHUB_OUTPUT
 
       - name: Set Docker Host
-        run: echo "remote_docker_host=${{ env.TEST }}"
+        run: echo "remote_docker_host=${{ steps.tf.outputs.TEST }}"
