@@ -44,15 +44,15 @@ jobs:
           run: ${{ steps.apply-run.outputs.run_id }}
           comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        id: tf
+      - uses: hashicorp/tfc-workflows-github/actions/plan-output@v1.0.4
+        id: plan-output
         with:
-          terraform_wrapper: false
-          workspace: ${{ env.TF_WORKSPACE }}
+          plan: ${{ steps.apply.outputs.plan_id }}
 
-      - name: Export Terraform output
-        run: echo TEST=$(terraform output -raw web-address)
-
-      - name: Set Docker Host
-        run: echo "remote_docker_host=${{ steps.tf.outputs.TEST }}"
+      - name: Reference Plan Output
+        run: |
+          echo "Plan status: ${{ steps.plan-output.outputs.web-address }}"
+          echo "Plan status: ${{ steps.plan-output.outputs.plan_status }}"
+          echo "Resources to Add: ${{ steps.plan-output.outputs.add }}"
+          echo "Resources to Change: ${{ steps.plan-output.outputs.change }}"
+          echo "Resources to Destroy: ${{ steps.plan-output.outputs.destroy }}"
