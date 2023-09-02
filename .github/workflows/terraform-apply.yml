@@ -58,19 +58,6 @@ jobs:
           echo "web address: $WEB_ADDRESS"
           echo WEB_ADDRESS=$WEB_ADDRESS >> $GITHUB_ENV
 
-      - name: Test
-        run: echo ${{ env.WEB_ADDRESS }}
-
-      - name: Deploy to Docker compose
-        uses: wshihadeh/docker-deployment-action@v1
-        with:
-          remote_docker_host: ec2-user@${{ env.WEB_ADDRESS }}
-          ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
-          ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
-          deployment_mode: docker-compose
-          stack_file_name: docker-compose.yaml
-          args: my-app
-
       - name: Start Deployment
         uses: TapTap21/docker-remote-deployment-action@v1.0
         with:
