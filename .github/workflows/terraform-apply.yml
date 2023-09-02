@@ -45,7 +45,7 @@ jobs:
           comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
 
