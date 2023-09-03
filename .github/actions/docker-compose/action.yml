@@ -1,0 +1,5 @@
+name: "Docker Compose"
+description: "Run Docker Compose on remote server using SSH"
+runs:
+  using: 'node16'
+  main: 'main.js'
