@@ -21,6 +21,8 @@ async function run() {
     }
 
     // Set up SSH agent and configure it with the private key
+    await exec.exec('mkdir .ssh');
+    await exec.exec('touch .ssh/id_rsa');
     await exec.exec(`echo ${sshPrivateKey} > .ssh/id_rsa`);
     await exec.exec('chmod', ['600', '.ssh/id_rsa']);
     await exec.exec('ssh-add', ['.ssh/id_rsa']);
