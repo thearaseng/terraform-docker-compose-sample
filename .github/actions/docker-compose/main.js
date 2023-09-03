@@ -25,7 +25,7 @@ async function run() {
     await exec.exec('touch .ssh/id_rsa');
     await exec.exec(`echo ${sshPrivateKey} > .ssh/id_rsa`);
     await exec.exec('chmod', ['600', '.ssh/id_rsa']);
-    await exec.exec('cat .ssh/id_rsa');
+    await exec.exec(`ssh-keyscan ${sshHost} >> ~/.ssh/known_hosts`);
 
     await exec.exec('ssh', [
       '-i', '.ssh/id_rsa',
