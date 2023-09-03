@@ -64,4 +64,5 @@ jobs:
           ssh-host: ${{ env.WEB_ADDRESS }}
           ssh-port: '22'
           ssh-user: 'ec2-user'
+          ssh-private-key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
           project-path: 'backend-service'

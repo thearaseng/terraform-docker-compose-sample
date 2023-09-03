@@ -14,6 +14,9 @@ inputs:
   project-path:
     description: 'Path to where docker-compose.yml copied on the remote server'
     required: true
+  ssh-private-key:
+    description: 'SSH Private Key'
+    required: true
 runs:
   using: 'node16'
   main: 'main.js'
