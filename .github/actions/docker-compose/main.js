@@ -27,12 +27,19 @@ async function run() {
     await exec.exec('chmod', ['600', '.ssh/id_rsa']);
     await exec.exec('cat .ssh/id_rsa');
 
-    await exec.exec('scp', [
-      '-P', sshPort,
+    await exec.exec('ssh', [
       '-i', '.ssh/id_rsa',
-      dockerComposePath,
-      `${sshUser}@${sshHost}:~/${projectPath}/docker-compose.yml`
+      '-p', sshPort,
+      `${sshUser}@${sshHost}`,
+      `mkdir ~/${projectPath}`
     ]);
+
+    // await exec.exec('scp', [
+    //   '-P', sshPort,
+    //   '-i', '.ssh/id_rsa',
+    //   dockerComposePath,
+    //   `${sshUser}@${sshHost}:~/${projectPath}/docker-compose.yml`
+    // ]);
     core.info('docker-compose.yml file copied to the remote server.');
 
     const dockerComposeCommand = 'docker-compose up -d';
