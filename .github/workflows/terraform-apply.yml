@@ -60,3 +60,8 @@ jobs:
 
       - name: Docker Compose
         uses: './.github/actions/docker-compose'
+        with:
+          ssh-host: ${{ env.WEB_ADDRESS }}
+          ssh-port: '22'
+          ssh-user: 'ec2-user'
+          project-path: 'backend-service'

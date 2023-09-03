@@ -1,5 +1,19 @@
 name: "Docker Compose"
 description: "Run Docker Compose on remote server using SSH"
+inputs:
+  ssh-host:
+    description: 'Server Host'
+    required: true
+  ssh-port:
+    description: 'SSH Port'
+    required: false
+    default: '22'
+  ssh-user:
+    description: 'SSH User'
+    required: true
+  project-path:
+    description: 'Path to where docker-compose.yml copied on the remote server'
+    required: true
 runs:
   using: 'node16'
   main: 'main.js'
